@@ -1,5 +1,4 @@
 $kind: http-request
-name: Update Vehicle Safety Profile
 url: "{{baseUrl}}/vehicle/:id"
 method: PATCH
 headers:

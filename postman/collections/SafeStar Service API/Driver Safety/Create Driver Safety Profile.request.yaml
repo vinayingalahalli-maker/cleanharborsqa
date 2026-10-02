@@ -1,5 +1,4 @@
 $kind: http-request
-name: Create Driver Safety Profile
 url: "{{baseUrl}}/driver/:id"
 method: POST
 headers:
