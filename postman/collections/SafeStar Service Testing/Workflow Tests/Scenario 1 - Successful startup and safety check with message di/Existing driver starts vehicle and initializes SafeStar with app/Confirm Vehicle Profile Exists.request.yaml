@@ -1,0 +1,40 @@
+$kind: http-request
+url: "{{baseUrl}}/vehicle/:id"
+method: GET
+pathVariables:
+  id: "{{vehicleID}}"
+auth:
+  type: jwt
+  credentials:
+    isSecretBase64Encoded: true
+    secret: "{{jwtSecret}}"
+    algorithm: HS256
+    payload: "{}"
+    addTokenTo: header
+    headerPrefix: Bearer
+    queryParamKey: token
+    header: "{}"
+scripts:
+  - type: afterResponse
+    code: |-
+      const vinDecode = pm.require('npm:vin-decode@0.2.0');
+      const qaWorkshopPackage = pm.require('@postvehicle-enterprise-team-72c110d7-6d95-4b84-b52b-1df8ec90/qa_workshop_package');
+
+      pm.test("VIN is a valid data", function () {
+          const jsonData=pm.response.json();
+         
+          console.log("Checking VIN : "+jsonData.vehicle.vin+" ..... ");
+          pm.expect(jsonData.vehicle.vin).to.be.a.string;
+          pm.expect(qaWorkshopPackage.isValidVIN(jsonData.vehicle.vin)).to.be.true;
+
+          console.log("Decoding VIN...");
+          const decodedVin = vinDecode(jsonData.vehicle.vin).decode();
+          console.log(decodedVin)
+      });
+    language: text/javascript
+    packages:
+      npm:vin-decode@0.2.0:
+        id: npm:vin-decode@0.2.0
+      "@postvehicle-enterprise-team-72c110d7-6d95-4b84-b52b-1df8ec90/qa_workshop_package":
+        id: 01a0f64b-4962-7981-802b-de3f7f572a17
+order: 2000

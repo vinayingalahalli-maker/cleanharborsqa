@@ -20,7 +20,7 @@ scripts:
     code: |-
       pm.test("SafetyScore is a number", function () {
           var jsonData = pm.response.json();
-          pm.expect(jsonData.safetyScore).to.be.a('string');
+          pm.expect(jsonData.safetyScore).to.be.a('number');
       });
     language: text/javascript
 order: 1000
