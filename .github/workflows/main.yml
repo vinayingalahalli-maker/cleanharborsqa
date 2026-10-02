@@ -20,8 +20,8 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API Tests with Collection/Folder - Demo
         run: |
-          postman collection run ./postman/collections/SafeStar\ Service\ Testing/Workflow\ Tests/Scenario\ 1\ -\ Successful\ startup\ and\ safety\ check\ with\ message\ display\ for\ existing\ driver\ and\ vehicle -e ./postman/environments/Test.environment.yaml --env-var jwtSecret=YS1zdHJpbmctc2VjcmV0LWF0LWxlYXN0LTI1Ni1iaXRzLWxvbmc= --env-var driverID=1001 --env-var vehicleID=1002 --report-events
-          postman collection run ./postman/collections/SafeStar\ Service\ Testing/Workflow\ Tests/Scenario\ 1\ -\ Successful\ startup\ and\ safety\ check\ with\ message\ display\ for\ existing\ driver\ and\ vehicle -e ./postman/environments/Prod.environment.yaml --env-var jwtSecret=YS1zdHJpbmctc2VjcmV0LWF0LWxlYXN0LTI1Ni1iaXRzLWxvbmc= --env-var driverID=1001 --env-var vehicleID=1002 --report-events
+          postman collection run ./postman/collections/SafeStar\ Service\ Testing -e ./postman/environments/Test.environment.yaml --env-var jwtSecret=YS1zdHJpbmctc2VjcmV0LWF0LWxlYXN0LTI1Ni1iaXRzLWxvbmc= --env-var driverID=1001 --env-var vehicleID=1002 --report-events
+          postman collection run ./postman/collections/SafeStar\ Service\ Testing -e ./postman/environments/Prod.environment.yaml --env-var jwtSecret=YS1zdHJpbmctc2VjcmV0LWF0LWxlYXN0LTI1Ni1iaXRzLWxvbmc= --env-var driverID=1001 --env-var vehicleID=1002 --report-events
       - name: Run API Tests with Monitor
         run: |
           postman monitor run 1f1be273-10b9-4280-8f69-91ec62e271a8
